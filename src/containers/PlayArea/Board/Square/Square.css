@@ -12,9 +12,9 @@
 }
 
 .EmptySquare {
-   
+   display: flex;
 }
 
-.Square:click {
+.clicked {
    transform: translateY(-130px);
 }
