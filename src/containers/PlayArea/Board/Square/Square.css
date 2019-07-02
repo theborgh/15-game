@@ -1,12 +1,12 @@
 .Square {
    display: flex;
    border: 2px solid black;
-   height: 100%;
-   width: 100%;
+   height: 130px;
+   width: 130px;
    background-color: goldenrod;
    justify-content: center;
    align-items: center;
-   cursor: grab;
+   cursor: default;
    font-size: 4rem;
    transition: all 1s;
 }
@@ -15,6 +15,19 @@
    display: flex;
 }
 
-.clicked {
-   transform: translateY(-130px);
+.clickable-up {
+   transform: translateY(-100%);
+}
+.clickable-down {
+   transform: translateY(100%);
+}
+.clickable-left {
+   transform: translateX(-100%);
+}
+.clickable-right {
+   transform: translateX(100%);
+}
+
+.clickable {
+   cursor: pointer;
 }

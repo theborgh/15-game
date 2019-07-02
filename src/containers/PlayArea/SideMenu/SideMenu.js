@@ -7,6 +7,8 @@ const sideMenu = () => {
          [SideMenu]
 
          <ul>
+            <li>Timer</li>
+            <li>Move counter</li>
             <li>AI help</li>
             <li>My account</li>
             <li>New game</li>

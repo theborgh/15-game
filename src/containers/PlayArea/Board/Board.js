@@ -5,7 +5,7 @@ import Square from './Square/Square';
 const board = (props) => {
    return(
       <div className="Board">
-         {props.boardState.map(sq => <Square id={sq} />)}
+         {props.boardState.map(sq => <Square id={sq} boardState={props.boardState} />)}
       </div>
    )
 }
