@@ -1,11 +1,11 @@
 import React from 'react';
 import './Square.css';
 
-const square = () => {
+const square = (props) => {
 
    return (
       <div>
-         [Square]
+         {props.id}
       </div>
    )
 }

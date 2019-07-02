@@ -1,23 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Navbar from './containers/Navbar/Navbar';
 import PlayArea from './containers/PlayArea/PlayArea'
 import Footer from './containers/Footer/Footer';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Navbar />
-      </header>
+class App extends Component {
 
-      <PlayArea />
+  state = {
+    solved: false,
+    boardState: [1, 3, 2, 6,
+                 5, 4, 8, 7,
+                 11, 10, 12, 9,
+                 13, 15, 14, 0]
+  };
 
-      <footer className="App-footer">
-        <Footer />
-      </footer>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <Navbar />
+        </header>
+
+        <PlayArea boardState={this.state.boardState} />
+
+        <footer className="App-footer">
+          <Footer />
+        </footer>
+      </div>
+    );
+  }
 }
 
 export default App;

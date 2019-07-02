@@ -3,10 +3,10 @@ import Board from './Board/Board';
 import SideMenu from './SideMenu/SideMenu';
 import './PlayArea.css';
 
-const playArea = () => {
+const playArea = (props) => {
    return(
       <div className="PlayArea">
-         <Board />
+         <Board boardState = {props.boardState} />
          <SideMenu />
       </div>
    );
