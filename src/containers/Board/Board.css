@@ -1,0 +1,10 @@
+.Board {
+   display: grid; 
+   grid-template-columns: 25% 25% 25% 25%;
+   grid-template-rows: 25% 25% 25% 25%;
+   grid-gap: 20px;
+   height: 70vh;
+   width: 70vw;
+   justify-items: center;
+   align-items: center;
+}
