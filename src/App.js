@@ -1,6 +1,6 @@
 import React from 'react';
-import Board from './containers/Board/Board';
 import Navbar from './containers/Navbar/Navbar';
+import PlayArea from './containers/PlayArea/PlayArea'
 import Footer from './containers/Footer/Footer';
 import './App.css';
 
@@ -11,9 +11,7 @@ function App() {
         <Navbar />
       </header>
 
-      {/* <PlayArea /> */}
-
-      <Board />
+      <PlayArea />
 
       <footer className="App-footer">
         <Footer />
