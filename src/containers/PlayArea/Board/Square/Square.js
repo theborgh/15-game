@@ -4,7 +4,7 @@ import './Square.css';
 const square = (props) => {
 
    return (
-      <div>
+      <div className="Square">
          {props.id}
       </div>
    )

@@ -3,8 +3,11 @@ import './Navbar.css';
 
 const navbar = () => {
    return (
-      <div>
-         [Navbar]
+      <div className="Navbar">
+         <div className="Navlink">Home</div>
+         <div className="Navlink">Rules</div>
+         <div className="Navlink">Login</div>
+         
       </div>
    );
 }

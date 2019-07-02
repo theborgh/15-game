@@ -1,6 +1,9 @@
 .Square {
+   display: flex;
    border: 2px solid black;
-   margin: 10px;
-   max-width: 100px;
-   max-height: 100px;
+   height: 100px;
+   width: 100px;
+   background-color: goldenrod;
+   justify-content: center;
+   align-items: center;
 }

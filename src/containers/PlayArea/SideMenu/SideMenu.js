@@ -3,8 +3,13 @@ import './SideMenu.css';
 
 const sideMenu = () => {
    return(
-      <div>
+      <div className="SideMenu">
          [SideMenu]
+
+         <ul>
+            <li>AI help</li>
+            <li>My account</li>
+         </ul>
       </div>
    );
 }
