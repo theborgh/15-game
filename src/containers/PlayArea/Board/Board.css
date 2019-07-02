@@ -11,4 +11,6 @@
    justify-items: center;
    align-items: center;
    background-color: sienna;
+   border: 10px solid brown;
+   border-radius: 10px;
 }

@@ -10,8 +10,8 @@ class App extends Component {
     solved: false,
     boardState: [1, 3, 2, 6,
                  5, 4, 8, 7,
-                 11, 10, 12, 9,
-                 13, 15, 14, 0]
+                 11, 10, 0, 9,
+                 13, 15, 14, 12]
   };
 
   render() {

@@ -1,9 +1,20 @@
 .Square {
    display: flex;
    border: 2px solid black;
-   height: 100px;
-   width: 100px;
+   height: 100%;
+   width: 100%;
    background-color: goldenrod;
    justify-content: center;
    align-items: center;
+   cursor: grab;
+   font-size: 4rem;
+   transition: all 1s;
+}
+
+.EmptySquare {
+   
+}
+
+.Square:click {
+   transform: translateY(-130px);
 }

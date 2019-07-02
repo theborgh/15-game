@@ -9,6 +9,7 @@ const sideMenu = () => {
          <ul>
             <li>AI help</li>
             <li>My account</li>
+            <li>New game</li>
          </ul>
       </div>
    );
