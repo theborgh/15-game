@@ -60,7 +60,7 @@ const square = (props) => {
       const classes = `Square ${clickable} ${directionClass}`;
       let square = <div className={classes} 
                         onClick={() => props.handleClick(clickable, props.id)}
-                        onTransitionEnd={() => props.handleTransitionEnd(props.id)} >
+                        /* onTransitionEnd={() => props.handleTransitionEnd(props.id)} */ >
          {props.id}</div>;
 
       if (props.id === 0) {

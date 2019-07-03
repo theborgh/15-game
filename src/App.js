@@ -28,13 +28,27 @@ class App extends Component {
 
   handleSquareClick = (clickable, id) => {
 
-    console.log("HandleClick triggered");
-
     if (clickable) {
       let currSquareClicked = [...this.state.squareClicked];
       currSquareClicked[id] = true;
       this.setState({ squareClicked: currSquareClicked })
+      // set square clicked back to false
+      
+      currSquareClicked[id] = false;
+      this.setState({ squareClicked: currSquareClicked })
+  
+      // Swap the zero square with the clicked square
+      let indexOfZero = this.state.boardState.indexOf(0);
+      let indexOfClickedSquare = this.state.boardState.indexOf(id);
+      let currBoardState = [...this.state.boardState];
+      currBoardState[indexOfZero] = id;
+      currBoardState[indexOfClickedSquare] = 0;
+  
+      this.setState({
+        boardState: currBoardState
+      })
     }
+
   }
 
   handleTransitionEnd = (squareId) => {
@@ -53,7 +67,6 @@ class App extends Component {
     this.setState({
       boardState: currBoardState
     })
-
 
     console.log(indexOfZero, indexOfClickedSquare, currBoardState, this.state.boardState);
   }
