@@ -9,27 +9,30 @@ class App extends Component {
   state = {
     solved: false,
     moveCounter: 0,
-    boardState: [1, 3, 2, 6,
-      5, 4, 8, 7,
-      11, 10, 0, 9,
-      13, 15, 14, 12],
+    boardState: [1, 2, 3, 4,
+      5, 6, 7, 8,
+      9, 10, 11, 0,
+      13, 14, 15, 12],
     squareClicked: new Array(16).fill(false)
   };
 
   // Is the board in its solved state?
-  boardIsSolved = () => {
-    for (let i in this.state.boardState) {
-      console.log(i, this.state.boardState);
-      if (this.state.boardState[i] !== i + 1) return false;
+  boardIsSolved = (boardState) => {
+    console.log(boardState);
+
+    for (let i = 0; i < boardState.length; i++) {
+      console.log("Index, state: ", i, boardState[i]);
+      if (boardState[i] !== i+1 && i !== 15) return false;
     }
 
     return true;
   }
 
   handleSquareClick = (clickable, id) => {
+    let currBoardState = [...this.state.boardState];
+    let currSquareClicked = [...this.state.squareClicked];
 
     if (clickable) {
-      let currSquareClicked = [...this.state.squareClicked];
       currSquareClicked[id] = true;
       this.setState({ squareClicked: currSquareClicked })
       // set square clicked back to false
@@ -40,14 +43,21 @@ class App extends Component {
       // Swap the zero square with the clicked square
       let indexOfZero = this.state.boardState.indexOf(0);
       let indexOfClickedSquare = this.state.boardState.indexOf(id);
-      let currBoardState = [...this.state.boardState];
       currBoardState[indexOfZero] = id;
       currBoardState[indexOfClickedSquare] = 0;
-  
+
       this.setState({
         boardState: currBoardState
       })
+  
+      if (this.boardIsSolved(currBoardState)) {
+        this.setState({
+          solved: true
+        })
+        alert("Congratulations, you won!")
+      }
     }
+
 
   }
 
