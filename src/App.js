@@ -8,6 +8,7 @@ class App extends Component {
 
   state = {
     solved: false,
+    moveCounter: 0,
     boardState: [1, 3, 2, 6,
                  5, 4, 8, 7,
                  11, 10, 0, 9,
@@ -24,6 +25,10 @@ class App extends Component {
      return true;
   }
 
+  handleSquareClick = () => {
+    
+  }
+
   render() {
     return (
       <div className="App">
@@ -31,7 +36,7 @@ class App extends Component {
           <Navbar />
         </header>
 
-        <PlayArea boardState={this.state.boardState} />
+        <PlayArea boardState={this.state.boardState} handleClick={this.handleSquareClick} clicked={this.clicked} />
 
         <footer className="App-footer">
           <Footer />

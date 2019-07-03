@@ -6,7 +6,7 @@ import './PlayArea.css';
 const playArea = (props) => {
    return(
       <div className="PlayArea">
-         <Board boardState = {props.boardState} />
+         <Board boardState = {props.boardState} handleClick={props.handleClick} clicked={props.clicked} />
          <SideMenu />
       </div>
    );

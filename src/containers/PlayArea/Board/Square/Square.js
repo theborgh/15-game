@@ -6,7 +6,7 @@ class Square extends Component {
 
    state = {
       clicked: false
-   };
+   }
 
    // Is the current square clickable? If so, what direction should it go? 
    isSquareClickable = (sqId) => {
@@ -62,7 +62,7 @@ class Square extends Component {
 
       const classes = `Square ${clickable} ${directionClass}`;
 
-      let square = <div className={classes} onClick={() => this.squareClicked()}>
+      let square = <div className={classes} onClick={() => this.setState({ clicked: true })}>
          {this.props.id}</div>;
       if (this.props.id === 0) {
          square = <div className="EmptySquare"></div>
@@ -71,9 +71,6 @@ class Square extends Component {
       return (square)
    }
 
-   squareClicked = () => {
-      this.setState({ clicked: true });
-   }
 }
 
 export default Square;
