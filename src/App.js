@@ -28,6 +28,8 @@ class App extends Component {
 
   handleSquareClick = (clickable, id) => {
 
+    console.log("HandleClick triggered");
+
     if (clickable) {
       let currSquareClicked = [...this.state.squareClicked];
       currSquareClicked[id] = true;
@@ -40,7 +42,7 @@ class App extends Component {
     let currSquareClicked = [...this.state.squareClicked];
     currSquareClicked[squareId] = false;
     this.setState({ squareClicked: currSquareClicked })
-    
+
     // Swap the zero square with the clicked square
     let indexOfZero = this.state.boardState.indexOf(0);
     let indexOfClickedSquare = this.state.boardState.indexOf(squareId);

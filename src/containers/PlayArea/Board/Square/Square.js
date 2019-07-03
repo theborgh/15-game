@@ -1,46 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import * as constants from '../../../../constants';
 import './Square.css';
 
-class Square extends Component {
-
-   state = {
-      clicked: false
-   }
+const square = (props) => {
 
    // Is the current square clickable? If so, what direction should it go? 
-   isSquareClickable = (sqId) => {
+   const isSquareClickable = (sqId) => {
 
       // find the index of the current square
-      let indexOfSq = this.props.boardState.indexOf(sqId);
+      let indexOfSq = props.boardState.indexOf(sqId);
 
       // check left side
-      if (indexOfSq % 4 !== 0 && this.props.boardState[indexOfSq - 1] === 0) {
+      if (indexOfSq % 4 !== 0 && props.boardState[indexOfSq - 1] === 0) {
          return constants.DIR_LEFT;
       }
       // check right side
       if (indexOfSq !== 3 && indexOfSq !== 7 && indexOfSq !== 11 && indexOfSq !== 15 &&
-         this.props.boardState[indexOfSq + 1] === 0) {
+         props.boardState[indexOfSq + 1] === 0) {
          return constants.DIR_RIGHT;
       }
       // check up
-      if (indexOfSq >= 4 && this.props.boardState[indexOfSq - 4] === 0) {
+      if (indexOfSq >= 4 && props.boardState[indexOfSq - 4] === 0) {
          return constants.DIR_UP;
       }
       // check down
-      if (indexOfSq <= 11 && this.props.boardState[indexOfSq + 4] === 0) {
+      if (indexOfSq <= 11 && props.boardState[indexOfSq + 4] === 0) {
          return constants.DIR_DOWN;
       }
 
       return false;
    }
 
-   render() {
-      const move_direction = this.isSquareClickable(this.props.id);
+      const move_direction = isSquareClickable(props.id);
       const clickable = move_direction ? 'clickable' : '';
       let directionClass = '';
 
-      if (clickable && this.props.clicked) {
+      if (clickable && props.clicked) {
          
          switch (move_direction) {
             case constants.DIR_UP:
@@ -59,20 +54,21 @@ class Square extends Component {
             default:
                directionClass = 0;
          }
+         console.log(directionClass)
       }
 
       const classes = `Square ${clickable} ${directionClass}`;
       let square = <div className={classes} 
-                        onClick={() => this.props.handleClick(clickable, this.props.id)}
-                        onTransitionEnd={() => this.props.handleTransitionEnd(this.props.id)} >
-         {this.props.id}</div>;
+                        onClick={() => props.handleClick(clickable, props.id)}
+                        onTransitionEnd={() => props.handleTransitionEnd(props.id)} >
+         {props.id}</div>;
 
-      if (this.props.id === 0) {
+      if (props.id === 0) {
          square = <div className="EmptySquare"></div>
       }
 
       return (square)
-   }
+   
 }
 
-export default Square;
+export default square;
