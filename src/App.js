@@ -12,7 +12,8 @@ class App extends Component {
     boardState: [1, 3, 2, 6,
                  5, 4, 8, 7,
                  11, 10, 0, 9,
-                 13, 15, 14, 12]
+                 13, 15, 14, 12],
+    squareClicked: new Array(16).fill(false)
   };
 
   // Is the board in its solved state?
@@ -25,8 +26,13 @@ class App extends Component {
      return true;
   }
 
-  handleSquareClick = () => {
-    
+  handleSquareClick = (id) => {
+    let currSquareClicked = [...this.state.squareClicked];
+    currSquareClicked[id] = true;
+
+    console.log(currSquareClicked);
+
+    this.setState({ squareClicked: currSquareClicked })
   }
 
   render() {
@@ -36,7 +42,9 @@ class App extends Component {
           <Navbar />
         </header>
 
-        <PlayArea boardState={this.state.boardState} handleClick={this.handleSquareClick} clicked={this.clicked} />
+        <PlayArea boardState={this.state.boardState} 
+                  clicked={this.state.squareClicked} 
+                  handleClick={this.handleSquareClick} />
 
         <footer className="App-footer">
           <Footer />

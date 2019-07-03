@@ -40,7 +40,8 @@ class Square extends Component {
       const clickable = move_direction ? 'clickable' : '';
       let directionClass = '';
 
-      if (clickable && this.state.clicked) {
+      if (clickable && this.props.clicked) {
+         
          switch (move_direction) {
             case constants.DIR_UP:
                directionClass = 'clickable-up';
@@ -61,8 +62,7 @@ class Square extends Component {
       }
 
       const classes = `Square ${clickable} ${directionClass}`;
-
-      let square = <div className={classes} onClick={() => this.setState({ clicked: true })}>
+      let square = <div className={classes} onClick={() => this.props.handleClick(this.props.id)}>
          {this.props.id}</div>;
       if (this.props.id === 0) {
          square = <div className="EmptySquare"></div>
@@ -70,7 +70,6 @@ class Square extends Component {
 
       return (square)
    }
-
 }
 
 export default Square;
