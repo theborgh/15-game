@@ -62,8 +62,11 @@ class Square extends Component {
       }
 
       const classes = `Square ${clickable} ${directionClass}`;
-      let square = <div className={classes} onClick={() => this.props.handleClick(this.props.id)}>
+      let square = <div className={classes} 
+                        onClick={() => this.props.handleClick(clickable, this.props.id)}
+                        onTransitionEnd={() => this.props.handleTransitionEnd(this.props.id)} >
          {this.props.id}</div>;
+
       if (this.props.id === 0) {
          square = <div className="EmptySquare"></div>
       }

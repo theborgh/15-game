@@ -7,7 +7,8 @@ const board = (props) => {
       <div className="Board">
          {props.boardState.map(sq => 
          <Square id={sq} boardState={props.boardState} 
-                         handleClick={props.handleClick} 
+                         handleClick={props.handleClick}
+                         handleTransitionEnd={props.handleTransitionEnd} 
                          clicked={props.clicked[sq]}
                          key={sq} />)}
       </div>

@@ -7,7 +7,8 @@ const playArea = (props) => {
    return(
       <div className="PlayArea">
          <Board boardState={props.boardState} 
-                handleClick={props.handleClick} 
+                handleClick={props.handleClick}
+                handleTransitionEnd={props.handleTransitionEnd} 
                 clicked={props.clicked} />
          <SideMenu />
       </div>

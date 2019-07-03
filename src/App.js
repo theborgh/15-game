@@ -10,29 +10,50 @@ class App extends Component {
     solved: false,
     moveCounter: 0,
     boardState: [1, 3, 2, 6,
-                 5, 4, 8, 7,
-                 11, 10, 0, 9,
-                 13, 15, 14, 12],
+      5, 4, 8, 7,
+      11, 10, 0, 9,
+      13, 15, 14, 12],
     squareClicked: new Array(16).fill(false)
   };
 
   // Is the board in its solved state?
   boardIsSolved = () => {
-     for (let i in this.state.boardState) {
-       console.log(i, this.state.boardState);
-        if (this.state.boardState[i] !== i+1) return false;
-     }
+    for (let i in this.state.boardState) {
+      console.log(i, this.state.boardState);
+      if (this.state.boardState[i] !== i + 1) return false;
+    }
 
-     return true;
+    return true;
   }
 
-  handleSquareClick = (id) => {
+  handleSquareClick = (clickable, id) => {
+
+    if (clickable) {
+      let currSquareClicked = [...this.state.squareClicked];
+      currSquareClicked[id] = true;
+      this.setState({ squareClicked: currSquareClicked })
+    }
+  }
+
+  handleTransitionEnd = (squareId) => {
+    // set square clicked back to false
     let currSquareClicked = [...this.state.squareClicked];
-    currSquareClicked[id] = true;
-
-    console.log(currSquareClicked);
-
+    currSquareClicked[squareId] = false;
     this.setState({ squareClicked: currSquareClicked })
+    
+    // Swap the zero square with the clicked square
+    let indexOfZero = this.state.boardState.indexOf(0);
+    let indexOfClickedSquare = this.state.boardState.indexOf(squareId);
+    let currBoardState = [...this.state.boardState];
+    currBoardState[indexOfZero] = squareId;
+    currBoardState[indexOfClickedSquare] = 0;
+
+    this.setState({
+      boardState: currBoardState
+    })
+
+
+    console.log(indexOfZero, indexOfClickedSquare, currBoardState, this.state.boardState);
   }
 
   render() {
@@ -42,9 +63,10 @@ class App extends Component {
           <Navbar />
         </header>
 
-        <PlayArea boardState={this.state.boardState} 
-                  clicked={this.state.squareClicked} 
-                  handleClick={this.handleSquareClick} />
+        <PlayArea boardState={this.state.boardState}
+          clicked={this.state.squareClicked}
+          handleClick={this.handleSquareClick}
+          handleTransitionEnd={this.handleTransitionEnd} />
 
         <footer className="App-footer">
           <Footer />
