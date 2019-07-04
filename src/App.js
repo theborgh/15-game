@@ -13,8 +13,18 @@ class App extends Component {
       5, 6, 7, 8,
       9, 10, 11, 0,
       13, 14, 15, 12],
-    squareClicked: new Array(16).fill(false)
+    squareClicked: new Array(16).fill(false),
+    resetTimer: false
   };
+
+  newGame = () => {
+    this.shuffleBoard();
+    
+    // reset timer
+    this.setState({
+      resetTimer: true
+    })
+  }
 
   // TODO: shuffle in such a way to preserve solvability
   shuffleBoard = () => {
@@ -29,7 +39,8 @@ class App extends Component {
     }
 
     this.setState({
-      boardState: shuffledBoard
+      boardState: shuffledBoard,
+      moveCounter: 0
     })
   }
 
@@ -49,6 +60,9 @@ class App extends Component {
     let newMoveCounter = this.state.moveCounter;
 
     if (clickable) {
+      this.setState({
+        resetTimer: false
+      })
       currSquareClicked[id] = true;
       this.setState({ squareClicked: currSquareClicked })
       // set square clicked back to false
@@ -98,6 +112,7 @@ class App extends Component {
   }
 
   render() {
+    
     return (
       <div className="App">
         <header className="App-header">
@@ -108,7 +123,9 @@ class App extends Component {
           clicked={this.state.squareClicked}
           handleClick={this.handleSquareClick}
           handleTransitionEnd={this.handleTransitionEnd}
-          moveCounter={this.state.moveCounter} />
+          moveCounter={this.state.moveCounter}
+          newGame={this.newGame}
+          resetTimer={this.state.resetTimer} />
 
         <footer className="App-footer">
           <Footer />

@@ -9,10 +9,10 @@ const sideMenu = (props) => {
          [SideMenu]
 
          <ul>
-            <li>Timer: <Timer /></li>
+            <li className="Timer">Timer: <Timer resetTimer={props.resetTimer} /></li>
             <li>Moves: {props.moveCounter}</li>
+            <li><button onClick={props.newGame}>New game</button></li>
             <li>AI help</li>
-            <li>New game</li>
          </ul>
       </div>
    );
