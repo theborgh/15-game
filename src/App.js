@@ -19,28 +19,51 @@ class App extends Component {
 
   newGame = () => {
     this.shuffleBoard();
-    
-    // reset timer
+ 
     this.setState({
       resetTimer: true
     })
   }
 
-  // TODO: shuffle in such a way to preserve solvability
+  // Shuffle the board while preserving puzzle solvability
   shuffleBoard = () => {
     let shuffledBoard = [...this.state.boardState];
+    let indexOfZero = shuffledBoard.indexOf(0);
+    let indexesOfNeighbors = [];
+    let randNeighborIndex;
 
-    for (let i = 0; i < 100; i++) {
-      let indexA = Math.floor(Math.random()*16);
-      let indexB = Math.floor(Math.random()*16);
-      let tmp = shuffledBoard[indexA];
-      shuffledBoard[indexA] = shuffledBoard[indexB];
-      shuffledBoard[indexB] = tmp;
+    for (let i = 0; i < 200; i++) {
+      // find neighbors & push them to an array
+      if ((indexOfZero+1) % 4 === 0) {
+        indexesOfNeighbors.push(indexOfZero-1);
+      } else if ((indexOfZero % 4) === 0) {
+        indexesOfNeighbors.push(indexOfZero+1);
+      } else {
+        indexesOfNeighbors.push(indexOfZero-1);
+        indexesOfNeighbors.push(indexOfZero+1);
+      }
+
+      if (indexOfZero > 3) {
+        indexesOfNeighbors.push(indexOfZero-4)
+      }
+
+      if (indexOfZero < 12) {
+        indexesOfNeighbors.push(indexOfZero+4);
+      }
+
+      // pick a random neighbor & swap with the zero
+      randNeighborIndex = indexesOfNeighbors[Math.floor(Math.random()*indexesOfNeighbors.length)];
+      console.log("io0, indexesOfNeighbors, board[io0], board[rn]: ",
+         indexOfZero, indexesOfNeighbors, shuffledBoard[indexOfZero], shuffledBoard[randNeighborIndex])
+      shuffledBoard[indexOfZero] = shuffledBoard[randNeighborIndex];
+      shuffledBoard[randNeighborIndex] = 0;
+
+      indexOfZero = randNeighborIndex;
+      indexesOfNeighbors = [];
     }
 
     this.setState({
-      boardState: shuffledBoard,
-      moveCounter: 0
+      boardState: shuffledBoard
     })
   }
 
