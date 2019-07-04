@@ -1,5 +1,6 @@
 import React from 'react';
 import './SideMenu.css';
+import Timer from '../../../components/Timer/Timer';
 
 const sideMenu = (props) => {
 
@@ -8,7 +9,7 @@ const sideMenu = (props) => {
          [SideMenu]
 
          <ul>
-            <li>Timer</li>
+            <li>Timer: <Timer /></li>
             <li>Moves: {props.moveCounter}</li>
             <li>AI help</li>
             <li>New game</li>
