@@ -35,10 +35,8 @@ class App extends Component {
 
   // Is the board in its solved state?
   boardIsSolved = (boardState) => {
-    console.log(boardState);
 
     for (let i = 0; i < boardState.length; i++) {
-      console.log("Index, state: ", i, boardState[i]);
       if (boardState[i] !== i+1 && i !== 15) return false;
     }
 
@@ -48,6 +46,7 @@ class App extends Component {
   handleSquareClick = (clickable, id) => {
     let currBoardState = [...this.state.boardState];
     let currSquareClicked = [...this.state.squareClicked];
+    let newMoveCounter = this.state.moveCounter;
 
     if (clickable) {
       currSquareClicked[id] = true;
@@ -64,7 +63,8 @@ class App extends Component {
       currBoardState[indexOfClickedSquare] = 0;
 
       this.setState({
-        boardState: currBoardState
+        boardState: currBoardState,
+        moveCounter: newMoveCounter+1
       })
   
       if (this.boardIsSolved(currBoardState)) {
@@ -107,7 +107,8 @@ class App extends Component {
         <PlayArea boardState={this.state.boardState}
           clicked={this.state.squareClicked}
           handleClick={this.handleSquareClick}
-          handleTransitionEnd={this.handleTransitionEnd} />
+          handleTransitionEnd={this.handleTransitionEnd}
+          moveCounter={this.state.moveCounter} />
 
         <footer className="App-footer">
           <Footer />

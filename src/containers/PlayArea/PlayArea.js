@@ -10,7 +10,7 @@ const playArea = (props) => {
                 handleClick={props.handleClick}
                 handleTransitionEnd={props.handleTransitionEnd} 
                 clicked={props.clicked} />
-         <SideMenu />
+         <SideMenu moveCounter={props.moveCounter} />
       </div>
    );
 }

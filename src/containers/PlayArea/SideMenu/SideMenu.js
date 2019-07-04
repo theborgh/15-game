@@ -1,16 +1,16 @@
 import React from 'react';
 import './SideMenu.css';
 
-const sideMenu = () => {
+const sideMenu = (props) => {
+
    return(
       <div className="SideMenu">
          [SideMenu]
 
          <ul>
             <li>Timer</li>
-            <li>Move counter</li>
+            <li>Moves: {props.moveCounter}</li>
             <li>AI help</li>
-            <li>My account</li>
             <li>New game</li>
          </ul>
       </div>
