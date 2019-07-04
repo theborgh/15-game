@@ -19,42 +19,52 @@ class App extends Component {
 
   newGame = () => {
     this.shuffleBoard();
- 
+
     this.setState({
-      resetTimer: true
+      resetTimer: true,
+      moveCounter: 0
     })
+  }
+
+  findIndexesOfNeighbors = (indexOfZero) => {
+    let indexesOfNeighbors = [];
+
+    // find neighbors & push them to an array
+    if ((indexOfZero + 1) % 4 === 0) {
+      indexesOfNeighbors.push(indexOfZero - 1);
+    } else if ((indexOfZero % 4) === 0) {
+      indexesOfNeighbors.push(indexOfZero + 1);
+    } else {
+      indexesOfNeighbors.push(indexOfZero - 1);
+      indexesOfNeighbors.push(indexOfZero + 1);
+    }
+
+    if (indexOfZero > 3) {
+      indexesOfNeighbors.push(indexOfZero - 4)
+    }
+
+    if (indexOfZero < 12) {
+      indexesOfNeighbors.push(indexOfZero + 4);
+    }
+
+    return indexesOfNeighbors;
   }
 
   // Shuffle the board while preserving puzzle solvability
   shuffleBoard = () => {
-    let shuffledBoard = [...this.state.boardState];
+    let shuffledBoard = [1, 2, 3, 4,
+      5, 6, 7, 8,
+      9, 10, 11, 12,
+      13, 14, 15, 0];
     let indexOfZero = shuffledBoard.indexOf(0);
     let indexesOfNeighbors = [];
     let randNeighborIndex;
 
-    for (let i = 0; i < 200; i++) {
-      // find neighbors & push them to an array
-      if ((indexOfZero+1) % 4 === 0) {
-        indexesOfNeighbors.push(indexOfZero-1);
-      } else if ((indexOfZero % 4) === 0) {
-        indexesOfNeighbors.push(indexOfZero+1);
-      } else {
-        indexesOfNeighbors.push(indexOfZero-1);
-        indexesOfNeighbors.push(indexOfZero+1);
-      }
-
-      if (indexOfZero > 3) {
-        indexesOfNeighbors.push(indexOfZero-4)
-      }
-
-      if (indexOfZero < 12) {
-        indexesOfNeighbors.push(indexOfZero+4);
-      }
+    for (let i = 0; i < 5; i++) {
+      indexesOfNeighbors = this.findIndexesOfNeighbors(indexOfZero);
 
       // pick a random neighbor & swap with the zero
-      randNeighborIndex = indexesOfNeighbors[Math.floor(Math.random()*indexesOfNeighbors.length)];
-      console.log("io0, indexesOfNeighbors, board[io0], board[rn]: ",
-         indexOfZero, indexesOfNeighbors, shuffledBoard[indexOfZero], shuffledBoard[randNeighborIndex])
+      randNeighborIndex = indexesOfNeighbors[Math.floor(Math.random() * indexesOfNeighbors.length)];
       shuffledBoard[indexOfZero] = shuffledBoard[randNeighborIndex];
       shuffledBoard[randNeighborIndex] = 0;
 
@@ -63,7 +73,8 @@ class App extends Component {
     }
 
     this.setState({
-      boardState: shuffledBoard
+      boardState: shuffledBoard,
+      solved: false
     })
   }
 
@@ -71,10 +82,47 @@ class App extends Component {
   boardIsSolved = (boardState) => {
 
     for (let i = 0; i < boardState.length; i++) {
-      if (boardState[i] !== i+1 && i !== 15) return false;
+      if (boardState[i] !== i + 1 && i !== 15) return false;
     }
 
     return true;
+  }
+
+  giveAIHint = () => {
+    let moves = [];
+    let legalMoves = [];
+    let board = [...this.state.boardState];
+    let indexOfZero = board.indexOf(0);
+    let tmp;
+
+    // find all possible moves (minus previous move: no point in going back)
+    legalMoves = this.findIndexesOfNeighbors(indexOfZero);
+
+    console.log(legalMoves)
+
+    // filter out the previous move
+    if (moves.length !== 0) {
+      console.log("moves is not empty")
+    }
+
+    // BFS: make each legal move & check if it solves the puzzle
+    for (let i = 0; i < legalMoves.length; i++) {
+      moves.push(legalMoves[i]);
+      tmp = board[legalMoves[i]];
+      board[indexOfZero] = board[legalMoves[i]];
+      board[legalMoves[i]] = 0;
+      if (this.boardIsSolved(board)) {
+        alert("Found a solution! " + moves[i]);
+        // make the FIRST move in the moves array
+        
+      } else {
+        // revert the move
+        board[indexOfZero] = 0;
+        board[legalMoves[i]] = tmp;
+      }
+    }
+    console.log("moves: ", moves)
+
   }
 
   handleSquareClick = (clickable, id) => {
@@ -89,10 +137,10 @@ class App extends Component {
       currSquareClicked[id] = true;
       this.setState({ squareClicked: currSquareClicked })
       // set square clicked back to false
-      
+
       currSquareClicked[id] = false;
       this.setState({ squareClicked: currSquareClicked })
-  
+
       // Swap the zero square with the clicked square
       let indexOfZero = this.state.boardState.indexOf(0);
       let indexOfClickedSquare = this.state.boardState.indexOf(id);
@@ -101,9 +149,9 @@ class App extends Component {
 
       this.setState({
         boardState: currBoardState,
-        moveCounter: newMoveCounter+1
+        moveCounter: newMoveCounter + 1
       })
-  
+
       if (this.boardIsSolved(currBoardState)) {
         this.setState({
           solved: true
@@ -135,7 +183,7 @@ class App extends Component {
   }
 
   render() {
-    
+
     return (
       <div className="App">
         <header className="App-header">
@@ -148,7 +196,8 @@ class App extends Component {
           handleTransitionEnd={this.handleTransitionEnd}
           moveCounter={this.state.moveCounter}
           newGame={this.newGame}
-          resetTimer={this.state.resetTimer} />
+          resetTimer={this.state.resetTimer}
+          AIHint={this.giveAIHint} />
 
         <footer className="App-footer">
           <Footer />

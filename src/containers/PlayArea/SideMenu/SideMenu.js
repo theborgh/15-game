@@ -12,7 +12,7 @@ const sideMenu = (props) => {
             <li className="Timer">Time: <Timer resetTimer={props.resetTimer} /></li>
             <li>Moves: {props.moveCounter}</li>
             <li><button onClick={props.newGame}>New game</button></li>
-            <li>AI help</li>
+            <li><button onClick={props.AIHint}>AI hint</button></li>
          </ul>
       </div>
    );

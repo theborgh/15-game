@@ -13,7 +13,8 @@ const playArea = (props) => {
                 clicked={props.clicked} />
          <SideMenu moveCounter={props.moveCounter}
                    newGame={props.newGame}
-                   resetTimer={props.resetTimer} />
+                   resetTimer={props.resetTimer}
+                   AIHint={props.AIHint} />
       </div>
    );
 }
