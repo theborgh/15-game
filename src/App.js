@@ -16,6 +16,23 @@ class App extends Component {
     squareClicked: new Array(16).fill(false)
   };
 
+  // TODO: shuffle in such a way to preserve solvability
+  shuffleBoard = () => {
+    let shuffledBoard = [...this.state.boardState];
+
+    for (let i = 0; i < 100; i++) {
+      let indexA = Math.floor(Math.random()*16);
+      let indexB = Math.floor(Math.random()*16);
+      let tmp = shuffledBoard[indexA];
+      shuffledBoard[indexA] = shuffledBoard[indexB];
+      shuffledBoard[indexB] = tmp;
+    }
+
+    this.setState({
+      boardState: shuffledBoard
+    })
+  }
+
   // Is the board in its solved state?
   boardIsSolved = (boardState) => {
     console.log(boardState);
@@ -57,7 +74,6 @@ class App extends Component {
         alert("Congratulations, you won!")
       }
     }
-
 
   }
 

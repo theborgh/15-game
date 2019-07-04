@@ -1,4 +1,11 @@
 .PlayArea {
    display: grid;
-   grid-template-columns: 60% 35%;
+   grid-template-rows: 65% 35%;
+   justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+   .PlayArea {
+      grid-template-columns: 72% 28%;
+   }
 }

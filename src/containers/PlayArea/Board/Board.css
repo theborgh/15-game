@@ -1,16 +1,25 @@
 .Board {
    justify-self: center;
    display: grid; 
-   margin: 20px;
-   padding: 20px;
+   margin: 7px;
+   padding: 7px;
    grid-template-columns: 25% 25% 25% 25%;
    grid-template-rows: 25% 25% 25% 25%;
    grid-gap: 0px;
-   height: 530px;
-   width: 530px;
+   height: 80vw; 
+   width: 80vw;
    justify-items: center;
    align-items: center;
    background-color: sienna;
    border: 10px solid brown;
    border-radius: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+   .Board {
+      margin: 20px;
+      padding: 20px;
+      height: calc(75vh - 50px);
+      width: calc(75vh - 50px);
+   }
 }
