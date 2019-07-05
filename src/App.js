@@ -15,7 +15,8 @@ class App extends Component {
         9, 10, 11, 0,
         13, 14, 15, 12],
     squareClicked: new Array(16).fill(false),
-    resetTimer: false
+    resetTimer: false,
+    showNewGameModal: false
   };
 
   newGame = (numOfShuffles) => {
@@ -28,7 +29,22 @@ class App extends Component {
     })
 
     // remove modal
+    this.setState({
+      showNewGameModal: false
+    })
   }
+
+  showModal = () => {
+    this.setState({
+       showNewGameModal: true
+    })
+ }    
+ 
+ hideNewGameModal = () => {
+    this.setState({
+      showNewGameModal: false
+    });
+}
 
   findIndexesOfNeighbors = (indexOfZero) => {
     let indexesOfNeighbors = [];
@@ -201,7 +217,10 @@ class App extends Component {
           moveCounter={this.state.moveCounter}
           newGame={this.newGame}
           resetTimer={this.state.resetTimer}
-          AIHint={this.giveAIHint} />
+          AIHint={this.giveAIHint}
+          showModal={this.state.showNewGameModal}
+          newGameClicked={this.showModal}
+          modalBackdropClicked={this.hideNewGameModal} />
 
         <footer className="App-footer">
           <Footer />
