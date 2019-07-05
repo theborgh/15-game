@@ -9,10 +9,11 @@ class App extends Component {
   state = {
     solved: false,
     moveCounter: 0,
-    boardState: [1, 2, 3, 4,
-      5, 6, 7, 8,
-      9, 10, 11, 0,
-      13, 14, 15, 12],
+    boardState:
+      [1, 2, 3, 4,
+        5, 6, 7, 8,
+        9, 10, 11, 0,
+        13, 14, 15, 12],
     squareClicked: new Array(16).fill(false),
     resetTimer: false
   };
@@ -114,7 +115,7 @@ class App extends Component {
       if (this.boardIsSolved(board)) {
         alert("Found a solution! " + moves[i]);
         // make the FIRST move in the moves array
-        
+
       } else {
         // revert the move
         board[indexOfZero] = 0;
