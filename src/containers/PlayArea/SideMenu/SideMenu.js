@@ -26,7 +26,7 @@ class SideMenu extends Component {
          <div className="SideMenu">
             [SideMenu]
    
-         <Modal show={this.state.showNewGameModal} modalClosed={this.hideNewGameModal} />
+         <Modal show={this.state.showNewGameModal} modalClosed={this.hideNewGameModal} newGame={this.props.newGame} />
 
             <ul>
                <li className="Timer">Time: <Timer resetTimer={this.props.resetTimer} /></li>

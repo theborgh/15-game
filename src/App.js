@@ -18,13 +18,16 @@ class App extends Component {
     resetTimer: false
   };
 
-  newGame = () => {
-    this.shuffleBoard();
+  newGame = (numOfShuffles) => {
+
+    this.shuffleBoard(numOfShuffles);
 
     this.setState({
       resetTimer: true,
       moveCounter: 0
     })
+
+    // remove modal
   }
 
   findIndexesOfNeighbors = (indexOfZero) => {
@@ -52,7 +55,7 @@ class App extends Component {
   }
 
   // Shuffle the board while preserving puzzle solvability
-  shuffleBoard = () => {
+  shuffleBoard = (numOfShuffles) => {
     let shuffledBoard = [1, 2, 3, 4,
       5, 6, 7, 8,
       9, 10, 11, 12,
@@ -61,7 +64,7 @@ class App extends Component {
     let indexesOfNeighbors = [];
     let randNeighborIndex;
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < numOfShuffles; i++) {
       indexesOfNeighbors = this.findIndexesOfNeighbors(indexOfZero);
 
       // pick a random neighbor & swap with the zero
