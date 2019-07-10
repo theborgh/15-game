@@ -3,8 +3,8 @@
    display: grid; 
    margin: 7px;
    padding: 7px;
-   grid-template-columns: 25% 25% 25% 25%;
-   grid-template-rows: 25% 25% 25% 25%;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   grid-template-rows: 1fr 1fr 1fr 1fr;
    grid-gap: 0px;
    height: 80vw; 
    width: 80vw;

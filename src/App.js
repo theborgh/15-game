@@ -3,6 +3,7 @@ import Navbar from './containers/Navbar/Navbar';
 import PlayArea from './containers/PlayArea/PlayArea'
 import Footer from './containers/Footer/Footer';
 import Signin from './components/Signin/Signin';
+import Register from './components/Register/Register';
 import './App.css';
 
 class App extends Component {
@@ -204,8 +205,8 @@ class App extends Component {
     console.log(indexOfZero, indexOfClickedSquare, currBoardState, this.state.boardState);
   }
 
-  onRouteChange = () => {
-    this.setState({ route: 'home' })
+  onRouteChange = (route) => {
+    this.setState({ route: route })
   }
 
   render() {
@@ -213,10 +214,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Navbar />
+          <Navbar onRouteChange={this.onRouteChange} route={this.state.route} />
         </header>
-        {this.state.route === 'signin' ?
-          <Signin onRouteChange={this.onRouteChange} /> :
+
+        {this.state.route === 'home' ?
 
           <PlayArea boardState={this.state.boardState}
             clicked={this.state.squareClicked}
@@ -228,7 +229,10 @@ class App extends Component {
             AIHint={this.giveAIHint}
             showModal={this.state.showNewGameModal}
             newGameClicked={this.showModal}
-            modalBackdropClicked={this.hideNewGameModal} />
+            modalBackdropClicked={this.hideNewGameModal} /> :
+            (this.state.route === 'signin' ? 
+            <Signin onRouteChange={this.onRouteChange} /> :
+            <Register onRouteChange={this.onRouteChange} /> )
         }
 
         <footer className="App-footer">
