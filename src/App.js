@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './containers/Navbar/Navbar';
 import PlayArea from './containers/PlayArea/PlayArea'
 import Footer from './containers/Footer/Footer';
+import Signin from './components/Signin/Signin';
 import './App.css';
 
 class App extends Component {
@@ -16,7 +17,8 @@ class App extends Component {
         13, 14, 15, 12],
     squareClicked: new Array(16).fill(false),
     resetTimer: false,
-    showNewGameModal: false
+    showNewGameModal: false,
+    route: 'signin'
   };
 
   newGame = (numOfShuffles) => {
@@ -36,15 +38,15 @@ class App extends Component {
 
   showModal = () => {
     this.setState({
-       showNewGameModal: true
+      showNewGameModal: true
     })
- }    
- 
- hideNewGameModal = () => {
+  }
+
+  hideNewGameModal = () => {
     this.setState({
       showNewGameModal: false
     });
-}
+  }
 
   findIndexesOfNeighbors = (indexOfZero) => {
     let indexesOfNeighbors = [];
@@ -202,6 +204,10 @@ class App extends Component {
     console.log(indexOfZero, indexOfClickedSquare, currBoardState, this.state.boardState);
   }
 
+  onRouteChange = () => {
+    this.setState({ route: 'home' })
+  }
+
   render() {
 
     return (
@@ -209,18 +215,21 @@ class App extends Component {
         <header className="App-header">
           <Navbar />
         </header>
+        {this.state.route === 'signin' ?
+          <Signin onRouteChange={this.onRouteChange} /> :
 
-        <PlayArea boardState={this.state.boardState}
-          clicked={this.state.squareClicked}
-          handleClick={this.handleSquareClick}
-          handleTransitionEnd={this.handleTransitionEnd}
-          moveCounter={this.state.moveCounter}
-          newGame={this.newGame}
-          resetTimer={this.state.resetTimer}
-          AIHint={this.giveAIHint}
-          showModal={this.state.showNewGameModal}
-          newGameClicked={this.showModal}
-          modalBackdropClicked={this.hideNewGameModal} />
+          <PlayArea boardState={this.state.boardState}
+            clicked={this.state.squareClicked}
+            handleClick={this.handleSquareClick}
+            handleTransitionEnd={this.handleTransitionEnd}
+            moveCounter={this.state.moveCounter}
+            newGame={this.newGame}
+            resetTimer={this.state.resetTimer}
+            AIHint={this.giveAIHint}
+            showModal={this.state.showNewGameModal}
+            newGameClicked={this.showModal}
+            modalBackdropClicked={this.hideNewGameModal} />
+        }
 
         <footer className="App-footer">
           <Footer />
