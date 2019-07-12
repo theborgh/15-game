@@ -1,15 +1,23 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import './Navbar.css';
 
 const navbar = (props) => {
    return (
       <div className="Navbar">
-         <div className="Navlink">Home</div>
-         <div className="Navlink">Rules & General Hints</div>
-         <div onClick={() => props.onRouteChange("signin")} className="Navlink">{props.route === 'home' ? "Sign out" : null}</div>
-         
+         <Link to="/">Home</Link>
+         <Link className="NavLink" to="/rules">Rules & General Hints</Link>
+         {
+            props.location.pathname === "/" ?
+               <div>
+                  <Link className="NavLink" to="/profile" >Profile</Link> | 
+                  <Link className="NavLink" to="/signin" >Sign out</Link>
+               </div> :
+               null
+         }
+
       </div>
    );
 }
 
-export default navbar;
+export default withRouter(navbar);

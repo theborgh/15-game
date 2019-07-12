@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import 'tachyons';
 
 const register = (props) => {
@@ -23,10 +24,11 @@ const register = (props) => {
                </fieldset>
                <div className="">
                   <input 
-                     onClick={() => props.onRouteChange("home")}
+                     onClick={() => props.history.push("/")}
                      className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                      type="submit" 
                      value="Register" />
+                     {/* <Link to="/" >Register</Link> */}
                </div>
             </div>
          </main>
@@ -35,4 +37,4 @@ const register = (props) => {
 }
 
 
-export default register;
+export default withRouter(register);

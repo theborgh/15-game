@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import Navbar from './containers/Navbar/Navbar';
 import PlayArea from './containers/PlayArea/PlayArea'
 import Footer from './containers/Footer/Footer';
@@ -20,7 +21,6 @@ class App extends Component {
       squareClicked: new Array(16).fill(false),
       resetTimer: false,
       showNewGameModal: false,
-      route: 'signin'
     };
   }
 
@@ -207,10 +207,6 @@ class App extends Component {
     console.log(indexOfZero, indexOfClickedSquare, currBoardState, this.state.boardState);
   }
 
-  onRouteChange = (route) => {
-    this.setState({ route: route })
-  }
-
   render() {
 
     return (
@@ -219,23 +215,30 @@ class App extends Component {
           <Navbar onRouteChange={this.onRouteChange} route={this.state.route} />
         </header>
 
-        {this.state.route === 'home' ?
+        <Switch>
+          <Route exact path="/" render={(routeProps) =>
+            <PlayArea
+              {...routeProps}
+              boardState={this.state.boardState}
+              clicked={this.state.squareClicked}
+              handleClick={this.handleSquareClick}
+              handleTransitionEnd={this.handleTransitionEnd}
+              moveCounter={this.state.moveCounter}
+              newGame={this.newGame}
+              resetTimer={this.state.resetTimer}
+              AIHint={this.giveAIHint}
+              showModal={this.state.showNewGameModal}
+              newGameClicked={this.showModal}
+              modalBackdropClicked={this.hideNewGameModal} />} />
 
-          <PlayArea boardState={this.state.boardState}
-            clicked={this.state.squareClicked}
-            handleClick={this.handleSquareClick}
-            handleTransitionEnd={this.handleTransitionEnd}
-            moveCounter={this.state.moveCounter}
-            newGame={this.newGame}
-            resetTimer={this.state.resetTimer}
-            AIHint={this.giveAIHint}
-            showModal={this.state.showNewGameModal}
-            newGameClicked={this.showModal}
-            modalBackdropClicked={this.hideNewGameModal} /> :
-            (this.state.route === 'signin' ? 
-            <Signin onRouteChange={this.onRouteChange} /> :
-            <Register onRouteChange={this.onRouteChange} /> )
-        }
+          <Route exact path="/signin" render={(routeProps) => 
+            <Signin {...routeProps} />
+          } />
+
+          <Route exact path="/register" render={(routeProps) =>
+            <Register {...routeProps} />
+          } />
+        </Switch>
 
         <footer className="App-footer">
           <Footer />

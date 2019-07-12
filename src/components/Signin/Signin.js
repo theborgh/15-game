@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import 'tachyons';
 
 const signin = (props) => {
@@ -19,13 +20,13 @@ const signin = (props) => {
                </fieldset>
                <div className="">
                   <input 
-                     onClick={() => props.onRouteChange("home")}
+                     //onClick={() => props.onRouteChange("home")}
                      className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                      type="submit" 
                      value="Sign in" />
                </div>
                <div className="lh-copy mt3">
-                  <p onClick={() => props.onRouteChange('register')} className="f6 link dim black db pointer">Register</p>
+                  <Link to="/register" >Register</Link>
                </div>
             </div>
          </main>
