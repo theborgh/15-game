@@ -10,7 +10,7 @@ const navbar = (props) => {
          {
             props.location.pathname === "/" ?
                <div>
-                  <Link className="NavLink" to="/profile" >Profile</Link> | 
+                  <Link className="NavLink" to="/profile" >Profile</Link> |&nbsp;
                   <Link className="NavLink" to="/signin" >Sign out</Link>
                </div> :
                null

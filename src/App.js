@@ -153,7 +153,6 @@ class App extends Component {
   handleSquareClick = (clickable, id) => {
     let currBoardState = [...this.state.boardState];
     let currSquareClicked = [...this.state.squareClicked];
-    let newMoveCounter = this.state.moveCounter;
 
     if (clickable) {
       this.setState({
@@ -172,19 +171,20 @@ class App extends Component {
       currBoardState[indexOfZero] = id;
       currBoardState[indexOfClickedSquare] = 0;
 
-      this.setState({
+      this.setState(prevState => ({
         boardState: currBoardState,
-        moveCounter: newMoveCounter + 1
+        moveCounter: prevState.moveCounter + 1
+      }), () => {
+        if (this.boardIsSolved(currBoardState)) {
+          alert("Congratulations, you won in " + this.state.moveCounter + " moves!")
+          this.setState({
+            solved: true,
+            resetTimer: true,
+            moveCounter: 0
+          })
+        }
       })
-
-      if (this.boardIsSolved(currBoardState)) {
-        this.setState({
-          solved: true
-        })
-        alert("Congratulations, you won!")
-      }
     }
-
   }
 
   handleTransitionEnd = (squareId) => {
